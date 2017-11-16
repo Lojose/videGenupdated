@@ -35,25 +35,37 @@ int main(int argc, char * argv[]) {
 		return 1;
 	}
 
-	Rectangle *rec1; 
-	rec1 = new Rectangle(30, 50); // white
-	rec1->setColor(255, 255, 255); 
-	rec1->startingPt(0, 0); 
+	Rectangle rec1 (30, 55, 0, 0);
+	rec1.setVelocity(10, 10); 
 
-	Rectangle *rec2; 
-	rec2 = new Rectangle(30, 40); // red
-	rec2->setColor(255, 0, 0);
-	rec2->startingPt(250, 400); 
+	Rectangle rec2 (30, 55, 150, 150);
+	rec2.setVelocity(10, 10); 
 
+	Rectangle rec3(30, 55, 200, 200);
+	rec2.setVelocity(10, 10);
 
 	int num_frames = duration_in_seconds * frames_per_second;
 	for (int i = 0; i < num_frames; ++i) {
-		double time_in_seconds = i / frames_per_second; 
-		rec1->draw_frame(time_in_seconds); 
-		rec2->draw_frame(time_in_seconds); 
-		frame.write(pipe);
-		frame.clear(); 
+		double dt = i / frames_per_second;
+		if (dt > 1.0 / 60.0) {
+			rec1.setColor(255, 255, 255); // white 
+			rec1.update(dt); 
+			rec1.draw_rect(); 
+
+			rec2.setColor(255, 0, 0); // red 
+			rec2.update(dt);
+			rec2.draw_rect();
+
+			rec3.setColor(255, 255, 0); // yellow 
+			rec3.update(dt);
+			rec3.draw_rect();
+
+
+			frame.write(pipe); 
+			frame.clear();
+		}
 	}
+
 	fflush(pipe);
 #ifdef _WIN32
 	_pclose(pipe);

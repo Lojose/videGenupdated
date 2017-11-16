@@ -2,18 +2,15 @@
 #include "Global.h" 
 #include <stdio.h>
 #include <cstring>
-#include "Rectangle.h"
-
 class Frame {
 public:
 	Frame();
 	~Frame();
 	void setPixel(int x, int y, byte r, byte g, byte blue);
 	void clear();
-	bool isOutside(int * x, int * y) const;
+	bool isOutside(double * x, double * y) const;
 	void write(FILE * file) const;
-	void clamp(int * x, int * y); 
-
+	void clamp(double *x, double *y); 
 private:
 	byte *pixels;
 };

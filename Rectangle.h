@@ -3,19 +3,20 @@
 #include "Global.h"
 class Rectangle {
 public:
-	Rectangle(int h, int w); 
-	void draw_rect(int x, int y, int w, int h, byte r, byte g, byte b); 
-	void draw_frame(double t); 
+	Rectangle(double h, double w, double x, double y); 
+	void draw_rect(); 
 	void setColor(byte r, byte g, byte b); 
-	void startingPt(int x, int y); 
-	//void Recc(Rectangle *renderer);
-	int x;
-	int y;
+	void setVelocity(double dx, double dy); 
+	void update(double dt); 
 private:
 	byte r; 
 	byte g; 
 	byte b;  
-	int h;
-	int w;  
-	//std::vector<Rectangle *> rectangles;
+	double h;
+	double w;  
+	double dx; 
+	double dy; 
+	double x; 
+	double y; 
+
 };
